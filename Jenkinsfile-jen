@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+        stage('build the image') {
+            steps {
+                sh '''
+                docker build -t jeanne:001 .
+                '''
+            }
+        }
+
+        stage('Checking images') {
+            steps {
+                sh '''
+                docker images
+                '''
+            }
+        }
+
+        stage('Checking container') {
+            steps {
+                sh '''
+                docker run -i --name foko jeanne:001
+                '''
+            }
+        }
+    }
+}
